@@ -2,7 +2,7 @@ import { useState } from "react";
 import { setLogout } from "@/state/authSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { FiUserX } from "react-icons/fi";
+import { FiHeart, FiUserX } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Menu() {
@@ -17,14 +17,15 @@ export default function Menu() {
           <Image
             className="rounded-full"
             src="/images/01.png"
-            width={64}
-            height={64}
+            alt="pfp"
+            width={48}
+            height={48}
           />
         </div>
       </button>
 
       <div
-        className={`bg-black p-6 rounded-md absolute top-[100%] transition z-3 ${
+        className={`bg-black p-6 w-40 rounded-md absolute top-[100%] transition z-3 ${
           isMenuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -33,8 +34,9 @@ export default function Menu() {
             <Image
               className="rounded-full"
               src="/images/01.png"
-              width={96}
-              height={96}
+              alt="pfp"
+              width={64}
+              height={64}
             />
           </div>
           <div>{user.username}</div>
@@ -42,13 +44,18 @@ export default function Menu() {
         </div>
         <ul>
           <li>
-            <Link href="">الملف الشخصي</Link>
+            <Link href="/profile">الملف الشخصي</Link>
           </li>
           <li>
-            <Link href="">إدارة الحساب</Link>
+            <Link href="/wishlist" className="text-white text-xl">
+              <FiHeart />
+            </Link>
           </li>
           <li>
-            <Link href="">إعلاناتي</Link>
+            <Link href="/manage">إدارة الحساب</Link>
+          </li>
+          <li>
+            <Link href={`/ads/${user.username}/${user._id}`}>إعلاناتي</Link>
           </li>
           <li>
             <button

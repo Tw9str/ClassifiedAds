@@ -18,7 +18,7 @@ export async function getServerSideProps() {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
     );
     const adsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/listing`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ads`
     );
 
     const categoryList = await categoriesResponse.json();

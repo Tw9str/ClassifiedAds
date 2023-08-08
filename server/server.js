@@ -5,7 +5,12 @@ const cors = require("cors");
 const helmet = require("helmet");
 const { addCategory, getCategories } = require("./controllers/category");
 const { login, register } = require("./controllers/user");
-const { addListing, getAds } = require("./controllers/ad");
+const {
+  addListing,
+  getAds,
+  getUserAds,
+  deleteAd,
+} = require("./controllers/ad");
 const verifyToken = require("./middleware/auth");
 require("dotenv").config();
 
@@ -33,8 +38,10 @@ app.post("/api/category/add", upload.single("img"), addCategory);
 app.get("/api/categories", getCategories);
 app.post("/api/auth/login", login);
 app.post("/api/auth/register", register);
-app.post("/api/listing/list", verifyToken, upload.array("imgs"), addListing);
-app.get("/api/listing", getAds);
+app.post("/api/listing/add", verifyToken, upload.array("imgs"), addListing);
+app.delete("/api/listing/delete/:id", verifyToken, deleteAd);
+app.get("/api/user/:id/ads", getUserAds);
+app.get("/api/ads", getAds);
 
 /* Server */
 const DB_URI = process.env.DB_URI;

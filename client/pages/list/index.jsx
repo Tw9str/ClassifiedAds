@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function List() {
   const [meesage, setMessage] = useState("");
@@ -10,6 +11,9 @@ export default function List() {
     description: "",
     imgs: [],
   });
+
+  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user?._id);
 
   function handleFileChange(e) {
     const files = Array.from(e.target.files);
@@ -29,16 +33,23 @@ export default function List() {
         formData.append(key, value);
       }
     }
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/listing/list`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const data = await res.json();
-    setMessage(data.message);
+    formData.append(`user`, user);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/listing/add`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
+      const data = await res.json();
+      setMessage(data.message);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
