@@ -42,7 +42,7 @@ export default function Ads({ adList }) {
       <SectionHead title="أحدث الأعلانات" linkText="إظهار الكل" />
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
         {ads?.map((ad, index) => {
-          const { category, title, location, price, imgsSrc, _id } = ad;
+          const { category, title, location, price, imgsSrc, _id, user } = ad;
           return (
             <Product
               key={index}
@@ -52,6 +52,7 @@ export default function Ads({ adList }) {
               price={price}
               imgsSrc={imgsSrc}
               id={_id}
+              user={user}
               onAdRemove={handleAdDelete}
             />
           );

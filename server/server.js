@@ -12,6 +12,7 @@ const {
   deleteAd,
 } = require("./controllers/ad");
 const verifyToken = require("./middleware/auth");
+const verifyAdOwner = require("./middleware/verifyAdOwner");
 require("dotenv").config();
 
 // Middleware
@@ -39,7 +40,7 @@ app.get("/api/categories", getCategories);
 app.post("/api/auth/login", login);
 app.post("/api/auth/register", register);
 app.post("/api/listing/add", verifyToken, upload.array("imgs"), addListing);
-app.delete("/api/listing/delete/:id", verifyToken, deleteAd);
+app.delete("/api/listing/delete/:id", verifyToken, verifyAdOwner, deleteAd);
 app.get("/api/user/:id/ads", getUserAds);
 app.get("/api/ads", getAds);
 

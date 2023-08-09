@@ -3,8 +3,8 @@ import Section from "@/components/widgets/Section";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function UserAds({ userAds }) {
-  const [ads, setAds] = useState(userAds);
+export default function UserAds({ userAdsList }) {
+  const [userAds, setUserAds] = useState(userAdsList);
   const token = useSelector((state) => state.token);
 
   async function handleAdDelete(id) {
@@ -18,7 +18,7 @@ export default function UserAds({ userAds }) {
           },
         }
       );
-      setAds((prevAds) => prevAds.filter((ad) => ad._id !== id));
+      setUserAds((prevAds) => prevAds.filter((ad) => ad._id !== id));
     } catch (err) {
       console.error(err);
     }
@@ -27,9 +27,9 @@ export default function UserAds({ userAds }) {
   return (
     <Section>
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
-        {ads?.length > 1 &&
-          ads?.map((ad, index) => {
-            const { category, title, location, price, imgsSrc, _id } = ad;
+        {userAds?.length > 0 &&
+          userAds?.map((ad, index) => {
+            const { category, title, location, price, imgsSrc, _id, user } = ad;
             return (
               <Product
                 key={index}
@@ -39,6 +39,7 @@ export default function UserAds({ userAds }) {
                 price={price}
                 imgsSrc={imgsSrc}
                 id={_id}
+                user={user}
                 onAdRemove={handleAdDelete}
               />
             );
@@ -50,15 +51,14 @@ export default function UserAds({ userAds }) {
 
 export async function getServerSideProps(context) {
   const id = context.query.userId;
-  console.log(id);
   try {
     const adsResponse = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}/ads`
     );
-    const userAds = await adsResponse.json();
+    const userAdsList = await adsResponse.json();
     return {
       props: {
-        userAds,
+        userAdsList,
       },
     };
   } catch (error) {

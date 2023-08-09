@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ImLocation } from "react-icons/im";
 import { FcApproval } from "react-icons/fc";
 import { FaHeart, FaShoppingCart, FaTrash } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function Product({
   category,
@@ -11,8 +12,10 @@ export default function Product({
   price,
   imgsSrc,
   id,
+  user,
   onAdRemove,
 }) {
+  const userId = useSelector((state) => state.user?._id);
   return (
     <div className="xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded border border-boxBorderLightGray">
       <img
@@ -49,9 +52,11 @@ export default function Product({
             <button className="text-gray">
               <FaHeart />
             </button>
-            <button className="text-gray" onClick={() => onAdRemove(id)}>
-              <FaTrash />
-            </button>
+            {userId === user && (
+              <button className="text-gray" onClick={() => onAdRemove(id)}>
+                <FaTrash />
+              </button>
+            )}
           </div>
         </div>
       </div>
