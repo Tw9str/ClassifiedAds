@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function UserAds({ userAdsList }) {
   const [userAds, setUserAds] = useState(userAdsList);
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.auth.token);
 
   async function handleAdDelete(id) {
     try {
@@ -29,7 +29,16 @@ export default function UserAds({ userAdsList }) {
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
         {userAds?.length > 0 &&
           userAds?.map((ad, index) => {
-            const { category, title, location, price, imgsSrc, _id, user } = ad;
+            const {
+              category,
+              title,
+              location,
+              price,
+              imgsSrc,
+              _id,
+              slug,
+              user,
+            } = ad;
             return (
               <Product
                 key={index}
@@ -39,6 +48,7 @@ export default function UserAds({ userAdsList }) {
                 price={price}
                 imgsSrc={imgsSrc}
                 id={_id}
+                slug={slug}
                 user={user}
                 onAdRemove={handleAdDelete}
               />

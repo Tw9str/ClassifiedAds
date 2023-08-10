@@ -2,9 +2,11 @@ import "@/styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Layout from "@/components/common/Layout";
 import { useRouter } from "next/router";
-import rootReducer from "@/state/authSlice";
+import authReducer from "@/state/authSlice";
+import cartReducer from "@/state/cartSlice";
+import wishlistReducer from "@/state/wishlistSlice";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,
@@ -20,6 +22,12 @@ import { PersistGate } from "redux-persist/integration/react";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+
+  const rootReducer = combineReducers({
+    auth: authReducer,
+    cart: cartReducer,
+    wishlist: wishlistReducer,
+  });
 
   const persistConfig = { key: "root", storage, version: 1 };
 

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Menu() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (

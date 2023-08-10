@@ -1,16 +1,24 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import ads from "@/products";
 import { AiOutlineClockCircle, AiOutlineTag } from "react-icons/ai";
 import Options from "@/components/product/Options";
 import SimilarAds from "@/components/product/SimilarAds";
+import Image from "next/image";
 
-export default function ProductDetails() {
-  const router = useRouter();
-  const { id } = router.query;
-  const product = ads.find((ad) => ad.id === parseInt(id));
-
-  return product ? (
+export default function ProductDetails({
+  ad: {
+    category,
+    createdAt,
+    description,
+    imgsSrc,
+    price,
+    slug,
+    title,
+    updatedAt,
+    user,
+    _id,
+  },
+}) {
+  return (
     <div className="bg-bgGray min-h-screen py-12">
       <div className="container flex gap-6 mx-auto p-6 items-start flex-col md:flex-row">
         <div className="flex flex-col gap-6">
@@ -19,17 +27,17 @@ export default function ProductDetails() {
               <div>
                 <div className="flex gap-2 text-gray">
                   <span className="flex items-center gap-2 pl-2">
-                    <AiOutlineClockCircle /> {product.date}
+                    <AiOutlineClockCircle /> {createdAt}
                   </span>
                 </div>
               </div>
-              <h3 className="text-gray font-bold text-2xl">{product.title}</h3>
+              <h3 className="text-gray font-bold text-2xl">{title}</h3>
               <Options />
             </div>
           </div>
           <div className="bg-white border border-lightGray p-6 rounded">
             <h3 className="pb-6 font-medium">الوصف:</h3>
-            <p className="text-gray">{product.description}</p>
+            <p className="text-gray">{description}</p>
           </div>
         </div>
         <div className="flex flex-col gap-6 basis-full w-full">
@@ -39,7 +47,7 @@ export default function ProductDetails() {
             </span>
             <div className="flex flex-col">
               <span className="text-primaryColor text-3xl font-bold">
-                ${product.price}
+                {price}
               </span>
               <span className="text-gray text-sm">قابل للتفاوض</span>
             </div>
@@ -48,19 +56,13 @@ export default function ProductDetails() {
             </span>
           </div>
           <div className="flex flex-col border border-lightGray p-6 rounded bg-white items-center">
-            <div className="rounded-full overflow-hidden w-28">
-              <img
-                src={product.publisher.img}
-                alt={product.publisher.title}
-                className="w-full"
-              />
+            <div className="rounded-full overflow-hidden w-24 h-24 relative">
+              <Image src={`/images/${imgsSrc[0]}`} alt={title} fill />
             </div>
-            <h4 className="font-semibold text-2xl pt-4">
-              {product.publisher.title}
-            </h4>
-            <p className="text-gray">{product.publisher.desc}</p>
+            <h4 className="font-semibold text-2xl pt-4">{title}</h4>
+            <p className="text-gray">{description}</p>
             <Link href="/ads" className="pt-2 underline text-[#4B7CE2]">
-              رؤية جميع الأعلانات
+              إظهار جميع الأعلانات
             </Link>
             <div className="flex gap-6 pt-6">
               <button className="border-2 border-[#cfd9e0] p-2 font-semibold text-gray rounded hover:text-primaryColor hover:border-primaryColor transition">
@@ -75,7 +77,28 @@ export default function ProductDetails() {
       </div>
       <SimilarAds />
     </div>
-  ) : (
-    <p>Loading...</p>
   );
+}
+
+export async function getServerSideProps(context) {
+  const slug = context.query.slug;
+  try {
+    const adResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ad/${slug}`
+    );
+    const ad = await adResponse.json();
+    return {
+      props: {
+        ad,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        ad: null,
+        error: "Failed to fetch data",
+      },
+    };
+  }
 }

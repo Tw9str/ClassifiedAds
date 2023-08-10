@@ -12,8 +12,8 @@ export default function List() {
     imgs: [],
   });
 
-  const token = useSelector((state) => state.token);
-  const user = useSelector((state) => state.user?._id);
+  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user?._id);
 
   function handleFileChange(e) {
     const files = Array.from(e.target.files);

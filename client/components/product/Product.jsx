@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ImLocation } from "react-icons/im";
 import { FcApproval } from "react-icons/fc";
 import { FaHeart, FaShoppingCart, FaTrash } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCartItem } from "@/state/cartSlice";
 
 export default function Product({
   category,
@@ -12,10 +13,37 @@ export default function Product({
   price,
   imgsSrc,
   id,
+  slug,
   user,
   onAdRemove,
 }) {
-  const userId = useSelector((state) => state.user?._id);
+  const userId = useSelector((state) => state.auth.user?._id);
+  const dispatch = useDispatch();
+
+  const item = {
+    id,
+    title,
+    price: Number.parseInt(price),
+    imgsSrc: imgsSrc[0],
+  };
+
+  function handleItemAdd(e) {
+    e.preventDefault();
+    dispatch(
+      addCartItem({
+        newItem: item,
+      })
+    );
+  }
+
+  const options = {
+    style: "currency",
+    currency: "SAR",
+    currencyDisplay: "symbol",
+    minimumFractionDigits: 0,
+  };
+  const formatter = new Intl.NumberFormat("ar-SA-u-nu-latn", options);
+
   return (
     <div className="xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded border border-boxBorderLightGray">
       <img
@@ -32,7 +60,7 @@ export default function Product({
             {category} <FcApproval />
           </Link>
           <Link
-            href={`/product/${id}`}
+            href={`/item/${slug}`}
             className="font-bold hover:text-primaryColor transition"
           >
             {title}
@@ -43,10 +71,11 @@ export default function Product({
         </div>
         <div className="p-4 border-t border-boxBorderLightGray flex justify-between">
           <p>
-            السعر: <span className="font-bold">${price}</span>
+            السعر:
+            <span className="font-bold"> {formatter.format(price)}</span>
           </p>
           <div className="flex gap-4">
-            <button className="text-gray">
+            <button className="text-gray" onClick={handleItemAdd}>
               <FaShoppingCart />
             </button>
             <button className="text-gray">

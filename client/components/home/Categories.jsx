@@ -11,7 +11,7 @@ export default function Categories({ categoryList }) {
         {categoryList?.map(({ imgSrc, title }, index) => (
           <Link
             key={index}
-            href={`/category/${title.replace(" ", "-")}`}
+            href={`/categories/${title.replace(" ", "-")}`}
             className="text-center hover:text-primaryColor transition"
           >
             <Image

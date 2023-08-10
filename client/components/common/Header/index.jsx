@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 export default function Header() {
   const router = useRouter();
 
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.auth.token);
 
   const isHomePage = router.pathname === "/";
 
