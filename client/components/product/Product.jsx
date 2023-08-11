@@ -5,6 +5,7 @@ import { FcApproval } from "react-icons/fc";
 import { FaHeart, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "@/state/cartSlice";
+import { addWishItem, removeWishItem } from "@/state/wishlistSlice";
 
 export default function Product({
   category,
@@ -19,6 +20,7 @@ export default function Product({
 }) {
   const userId = useSelector((state) => state.auth.user?._id);
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.wishlist.items);
 
   const item = {
     id,
@@ -27,13 +29,28 @@ export default function Product({
     imgsSrc: imgsSrc[0],
   };
 
-  function handleItemAdd(e) {
-    e.preventDefault();
+  function handleItemAdd() {
     dispatch(
       addCartItem({
         newItem: item,
       })
     );
+  }
+
+  function handleFavClick() {
+    if (items.some((item) => item.id === id)) {
+      dispatch(
+        removeWishItem({
+          id,
+        })
+      );
+    } else {
+      dispatch(
+        addWishItem({
+          newItem: item,
+        })
+      );
+    }
   }
 
   const options = {
@@ -78,7 +95,7 @@ export default function Product({
             <button className="text-gray" onClick={handleItemAdd}>
               <FaShoppingCart />
             </button>
-            <button className="text-gray">
+            <button className="text-gray" onClick={handleFavClick}>
               <FaHeart />
             </button>
             {userId === user && (
