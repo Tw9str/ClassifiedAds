@@ -40,7 +40,7 @@ export default function Ads({ adList }) {
   return (
     <Section>
       <SectionHead title="أحدث الأعلانات" linkText="إظهار الكل" />
-      <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
+      <div className="flex flex-wrap items-center justify-start pt-6 gap-2">
         {ads?.map((ad, index) => {
           const { category, title, location, price, imgsSrc, _id, slug, user } =
             ad;

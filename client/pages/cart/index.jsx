@@ -8,8 +8,9 @@ import {
 // import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
+import Section from "@/components/widgets/Section";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -60,11 +61,8 @@ export default function Cart() {
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   return (
-    <div>
+    <Section>
       <div className="">
-        <button onClick={() => dispatch(closeCart())}>
-          <AiOutlineClose size={24} />
-        </button>
         <h2>السلة</h2>
         {items.length > 0 && (
           <div className="">
@@ -128,6 +126,6 @@ export default function Cart() {
         )}
         {items.length === 0 && <p>لم تقف بإضافة عناصر الى السلة</p>}
       </div>
-    </div>
+    </Section>
   );
 }

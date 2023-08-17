@@ -1,67 +1,72 @@
-import { useState, useRef } from "react";
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
+import { useEffect, useRef, useState } from "react";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { BsImages } from "react-icons/bs";
 
-export default function Slider({ children }) {
-  const [isDown, setIsDown] = useState(false);
-  const [x, setX] = useState(0);
-  const [currentX, setCurrentX] = useState(0);
-  const productsContainer = useRef();
+export default function Slider({ children, currentImg, totalImgs }) {
+  const [currentCount, setCurrentCount] = useState(0);
 
-  const handleMouseDown = (e) => {
-    setIsDown(true);
-    setX(e.pageX - productsContainer.current.offsetLeft);
-  };
+  const sliderRef = useRef();
 
-  const handleMouseUp = () => {
-    setIsDown(false);
-  };
-
-  const handleMouseMove = (e) => {
-    e.preventDefault();
-    if (!isDown) return;
-    setCurrentX(e.pageX - productsContainer.current.offsetLeft);
-    const walk = (x - currentX) * 3;
-    productsContainer.current.scrollLeft += walk;
-  };
-
-  const handlePrevClick = () => {
-    productsContainer.current.scrollBy({
-      left: -productsContainer.current.offsetWidth,
+  function handleNextClick() {
+    sliderRef.current.scrollBy({
+      left: sliderRef.current.offsetWidth,
       behavior: "smooth",
       scrollTimingFunction: "ease-in-out",
-    })
-  };
+    });
+    if (currentCount < totalImgs) {
+      setCurrentCount((prev) => prev + 1);
+    }
+    console.log(sliderRef.current.offsetWidth);
+  }
 
-  const handleNextClick = () => {
-    productsContainer.current.scrollBy({
-      left: productsContainer.current.offsetWidth,
+  function handlePrevClick() {
+    sliderRef.current.scrollBy({
+      left: -sliderRef.current.offsetWidth,
       behavior: "smooth",
       scrollTimingFunction: "ease-in-out",
-    })
-  };
+    });
+    if (currentCount > 1) {
+      setCurrentCount((prev) => prev - 1);
+    }
+    console.log(sliderRef.current.offsetWidth);
+  }
+
+  useEffect(() => {
+    if (currentImg !== null) {
+      const scrollPosition =
+        sliderRef.current.offsetWidth * currentImg -
+        sliderRef.current.offsetWidth;
+      sliderRef.current.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+      setCurrentCount(currentImg);
+    }
+  }, [currentImg]);
 
   return (
-    <div className="relative">
+    <div
+      className="flex items-center justify-start gap-4 overflow-x-scroll scroll-snap-type-x mandatory scrollbar-hide"
+      ref={sliderRef}
+    >
+      {children}
       <button
-        className="bg-primaryColor rounded-full text-white absolute right-0 top-1/2 transform -translate-y-1/2 text-2xl p-2"
-        onClick={handleNextClick}>
+        className="absolute z-2 p-4 border-none bg-transparent cursor-pointer right-4"
+        onClick={handleNextClick}
+      >
         <AiOutlineArrowRight />
       </button>
-      <div
-        className={`flex overflow-x-scroll scrollbar-hide pt-6 gap-2 pb-20 snap-mandatory snap-x scroll-smooth${
-          isDown && ` cursor-grabbing`
-        }`}
-        ref={productsContainer}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}>
-        {children}
-      </div>
       <button
-        className="bg-primaryColor rounded-full text-white absolute left-0 top-1/2 transform -translate-y-1/2 text-2xl p-2"
-        onClick={handlePrevClick}>
+        className="absolute z-2 p-4 border-none bg-transparent cursor-pointer left-4"
+        onClick={handlePrevClick}
+      >
         <AiOutlineArrowLeft />
       </button>
+      {totalImgs && (
+        <div className="flex items-center justify-center gap-2 font-semibold absolute bottom-1/4 right-1/4 z-1 text-primary-600">
+          <BsImages /> {currentCount} / {totalImgs}
+        </div>
+      )}
     </div>
   );
 }

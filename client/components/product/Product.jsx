@@ -2,10 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { ImLocation } from "react-icons/im";
 import { FcApproval } from "react-icons/fc";
-import { FaHeart, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "@/state/cartSlice";
 import { addWishItem, removeWishItem } from "@/state/wishlistSlice";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BsCart, BsCartFill, BsTrash, BsTrashFill } from "react-icons/bs";
 
 export default function Product({
   category,
@@ -93,14 +94,14 @@ export default function Product({
           </p>
           <div className="flex gap-4">
             <button className="text-gray" onClick={handleItemAdd}>
-              <FaShoppingCart />
+              <BsCart />
             </button>
             <button className="text-gray" onClick={handleFavClick}>
-              <FaHeart />
+              <AiOutlineHeart />
             </button>
             {userId === user && (
               <button className="text-gray" onClick={() => onAdRemove(id)}>
-                <FaTrash />
+                <BsTrash />
               </button>
             )}
           </div>

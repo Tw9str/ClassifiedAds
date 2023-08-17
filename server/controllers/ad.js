@@ -18,10 +18,11 @@ const getAds = async (req, res) => {
 const getAd = async (req, res) => {
   const { slug } = req.params;
   try {
-    const ad = await Ad.findOne({ slug });
+    const ad = await Ad.findOne({ slug }).populate("user").lean();
     if (!ad) {
       return res.status(404).send({ message: "Ad not found" });
     }
+    delete ad.user.password;
     res.json(ad);
   } catch (err) {
     res.status(500).send({ message: err.message });
