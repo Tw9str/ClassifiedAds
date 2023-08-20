@@ -25,7 +25,7 @@ export default function Menu() {
       </button>
 
       <div
-        className={`bg-black p-6 w-40 rounded-md absolute top-[100%] transition z-3 ${
+        className={`bg-black p-6 w-40 rounded-md absolute top-[100%] transition z-10 ${
           isMenuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >

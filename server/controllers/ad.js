@@ -1,11 +1,12 @@
 const Ad = require("../models/ad");
+const Category = require("../models/category");
 const { promisify } = require("util");
 const { join } = require("path");
 const fs = require("fs");
 
 const getAds = async (req, res) => {
   try {
-    const ads = await Ad.find();
+    const ads = await Ad.find().populate("category");
 
     res.json(ads);
   } catch (error) {
@@ -32,13 +33,35 @@ const getAd = async (req, res) => {
 const getUserAds = async (req, res) => {
   const { id } = req.params;
   try {
-    const ad = await Ad.find({ user: id });
+    const ad = await Ad.find({ user: id }).populate("category");
     if (!ad) {
       return res.status(404).send({ message: "Ad not found" });
     }
     res.json(ad);
   } catch (err) {
     res.status(500).send({ message: err.message });
+  }
+};
+
+const getCategoryAds = async (req, res) => {
+  const { title } = req.params;
+  try {
+    const category = await Category.findOne({ title });
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    const ads = await Ad.find({ category: category._id });
+
+    if (!ads || ads.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No ads found for this category" });
+    }
+
+    res.json(ads);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -107,6 +130,7 @@ module.exports = {
   getAds,
   getAd,
   getUserAds,
+  getCategoryAds,
   addListing,
   updateSold,
   deleteAd,

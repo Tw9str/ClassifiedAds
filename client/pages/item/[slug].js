@@ -20,10 +20,18 @@ export default function ProductDetails({
     _id,
   },
 }) {
+  const options = {
+    style: "currency",
+    currency: "SAR",
+    currencyDisplay: "symbol",
+    minimumFractionDigits: 0,
+  };
+  const formatter = new Intl.NumberFormat("ar-SA-u-nu-latn", options);
+
   return (
     <Section>
-      <div className="flex gap-6 mx-auto items-start flex-col md:flex-row">
-        <div className="flex flex-col w-3/5 gap-6">
+      <div className="flex flex-col gap-6 mx-auto items-start flex-col md:flex-row">
+        <div className="flex flex-col w-full gap-6 md:w-3/4">
           <div className="relative p-6 flex gap-6 bg-white flex-col border border-lightGray rounded basis-1/2">
             <div className="flex flex-col gap-4">
               <div>
@@ -42,7 +50,9 @@ export default function ProductDetails({
                     className="relative snap-start w-full flex-[0_0_100%] aspect-video"
                   >
                     <Image
-                      style={{ objectFit: "contain" }}
+                      style={{
+                        objectFit: "contain",
+                      }}
                       key={img}
                       src={`/images/${img}`}
                       alt={title}
@@ -58,14 +68,14 @@ export default function ProductDetails({
             <p className="text-gray">{description}</p>
           </div>
         </div>
-        <div className="flex flex-col w-2/5 gap-6">
+        <div className="flex w-full gap-6 md:w-1/4 flex-col">
           <div className="overflow-hidden flex border border-lightGray p-6 rounded bg-white items-center gap-6">
             <span className="border-l border-lightGray pl-6 text-5xl">
               <AiOutlineTag className="text-[#cfd9e0]" />
             </span>
             <div className="flex flex-col">
               <span className="text-primaryColor text-3xl font-bold">
-                {price}
+                {formatter.format(price)}
               </span>
             </div>
             <span className="pl-6 text-7xl text-[#cfd9e0] opacity-30 -left-8 -bottom-4">
@@ -85,7 +95,7 @@ export default function ProductDetails({
               href={`/ads/${user.username}/${user._id}`}
               className="font-semibold text-2xl pt-4"
             >
-              {title}
+              {user.username}
             </Link>
           </div>
         </div>

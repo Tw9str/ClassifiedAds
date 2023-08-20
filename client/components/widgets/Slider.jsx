@@ -16,7 +16,6 @@ export default function Slider({ children, currentImg, totalImgs }) {
     if (currentCount < totalImgs) {
       setCurrentCount((prev) => prev + 1);
     }
-    console.log(sliderRef.current.offsetWidth);
   }
 
   function handlePrevClick() {
@@ -28,7 +27,6 @@ export default function Slider({ children, currentImg, totalImgs }) {
     if (currentCount > 1) {
       setCurrentCount((prev) => prev - 1);
     }
-    console.log(sliderRef.current.offsetWidth);
   }
 
   useEffect(() => {
@@ -46,7 +44,7 @@ export default function Slider({ children, currentImg, totalImgs }) {
 
   return (
     <div
-      className="flex items-center justify-start gap-4 overflow-x-scroll scroll-snap-type-x mandatory scrollbar-hide"
+      className="flex items-center justify-start gap-4 overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
       ref={sliderRef}
     >
       {children}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function List() {
+export default function List({ categoryList }) {
   const [meesage, setMessage] = useState("");
 
   const [inputValues, setInputValues] = useState({
@@ -11,7 +11,6 @@ export default function List() {
     description: "",
     imgs: [],
   });
-
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user?._id);
 
@@ -87,7 +86,7 @@ export default function List() {
           الفئة
         </label>
         <div className="mt-2">
-          <input
+          <select
             className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
             type="text"
             name="category"
@@ -98,7 +97,11 @@ export default function List() {
             onChange={(e) =>
               setInputValues({ ...inputValues, category: e.target.value })
             }
-          />
+          >
+            {categoryList.map((category) => (
+              <option value={category._id}>{category.title}</option>
+            ))}
+          </select>
         </div>
         <label
           htmlFor="price"
@@ -169,4 +172,26 @@ export default function List() {
       </form>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const categoryResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
+    );
+    const categoryList = await categoryResponse.json();
+    return {
+      props: {
+        categoryList,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        categoryList: null,
+        error: "Failed to fetch data",
+      },
+    };
+  }
 }

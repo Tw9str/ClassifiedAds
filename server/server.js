@@ -11,6 +11,7 @@ const {
   getUserAds,
   deleteAd,
   getAd,
+  getCategoryAds,
 } = require("./controllers/ad");
 const verifyToken = require("./middleware/auth");
 const verifyAdOwner = require("./middleware/verifyAdOwner");
@@ -38,6 +39,7 @@ const upload = multer({ storage });
 
 app.post("/api/category/add", upload.single("img"), addCategory);
 app.get("/api/categories", getCategories);
+app.get("/api/categories/:title", getCategoryAds);
 app.post("/api/auth/login", login);
 app.post("/api/auth/register", register);
 app.post("/api/listing/add", verifyToken, upload.array("imgs"), addListing);

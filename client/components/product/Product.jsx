@@ -72,10 +72,10 @@ export default function Product({
       <div>
         <div className="p-4 pt-2">
           <Link
-            href="/category"
+            href={`/categories/${category.title}`}
             className="flex items-center gap-2 text-gray text-sm pb-2"
           >
-            {category} <FcApproval />
+            {category.title} <FcApproval />
           </Link>
           <Link
             href={`/item/${slug}`}

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Product from "../product/Product";
 
 export default function Ads({ adList }) {
-  const [ads, setAds] = useState(adList);
+  const [ads, setAds] = useState(adList.slice(0, 12));
   const token = useSelector((state) => state.auth.token);
 
   // async function handleAdSold(id) {
@@ -39,7 +39,11 @@ export default function Ads({ adList }) {
   }
   return (
     <Section>
-      <SectionHead title="أحدث الأعلانات" linkText="إظهار الكل" />
+      <SectionHead
+        title="أحدث الأعلانات"
+        linkTarget="ads"
+        linkText="إظهار الكل"
+      />
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2">
         {ads?.map((ad, index) => {
           const { category, title, location, price, imgsSrc, _id, slug, user } =
