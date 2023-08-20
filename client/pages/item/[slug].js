@@ -65,7 +65,7 @@ export default function ProductDetails({
           </div>
           <div className="bg-white border border-lightGray p-6 rounded">
             <h3 className="pb-6 font-medium">الوصف:</h3>
-            <p className="text-gray">{description}</p>
+            <p className="text-gray whitespace-pre-wrap">{description}</p>
           </div>
         </div>
         <div className="flex w-full gap-6 md:w-1/4 flex-col">
