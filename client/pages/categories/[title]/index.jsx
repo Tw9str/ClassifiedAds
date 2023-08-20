@@ -30,25 +30,35 @@ export default function Title({ categoryAdList }) {
   return (
     <Section>
       <h1>{title?.replace("-", " ")}</h1>
-      {categoryAdArray.length > 0 &&
-        categoryAdArray?.map((ad, index) => {
-          const { category, title, location, price, imgsSrc, _id, slug, user } =
-            ad;
-          return (
-            <Product
-              key={index}
-              category={category}
-              title={title}
-              location={location}
-              price={price}
-              imgsSrc={imgsSrc}
-              id={_id}
-              slug={slug}
-              user={user}
-              onAdRemove={handleAdDelete}
-            />
-          );
-        })}
+      <div className="flex flex-wrap items-center justify-start pt-6 gap-2">
+        {categoryAdArray.length > 0 &&
+          categoryAdArray?.map((ad, index) => {
+            const {
+              category,
+              title,
+              location,
+              price,
+              imgsSrc,
+              _id,
+              slug,
+              user,
+            } = ad;
+            return (
+              <Product
+                key={index}
+                category={category}
+                title={title}
+                location={location}
+                price={price}
+                imgsSrc={imgsSrc}
+                id={_id}
+                slug={slug}
+                user={user}
+                onAdRemove={handleAdDelete}
+              />
+            );
+          })}
+      </div>
     </Section>
   );
 }
