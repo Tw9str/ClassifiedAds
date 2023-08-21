@@ -4,7 +4,7 @@ import Section from "@/components/widgets/Section";
 export default function AllCategories({ categoryList }) {
   return (
     <Section>
-      <div className="pt-6 flex flex-wrap gap-10 justify-start items-center">
+      <div className="pt-6 flex flex-wrap gap-10 justify-center items-center">
         {categoryList?.map(({ title, imgSrc, adCount }, index) => (
           <CategoyBox
             key={index}

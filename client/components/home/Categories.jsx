@@ -13,7 +13,7 @@ export default function Categories({ categoryList }) {
         linkTarget="categories"
         linkText="إظهار الكل"
       />
-      <div className="pt-6 flex flex-wrap gap-10 justify-start items-center">
+      <div className="pt-6 flex flex-wrap gap-10 justify-center items-center">
         {categoryList.slice(0, 12)?.map(({ title, imgSrc, adCount }, index) => (
           <CategoyBox
             key={index}

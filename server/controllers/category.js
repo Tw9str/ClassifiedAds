@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const Ad = require("../models/ad");
 const { promisify } = require("util");
 const { join } = require("path");
 const fs = require("fs");
@@ -6,23 +7,31 @@ const fs = require("fs");
 const getCategories = async (req, res) => {
   try {
     const categories = await Category.find();
-
-    res.json(categories);
+    const categoriesWithAdCounts = await Promise.all(
+      categories.map(async (category) => {
+        const ads = await Ad.find({ category: category._id });
+        const adCount = ads.length;
+        return {
+          ...category._doc,
+          adCount: adCount,
+        };
+      })
+    );
+    res.json(categoriesWithAdCounts);
   } catch (error) {
-    console.error("Error fetching Categorys:", error);
-
-    res.status(500).json({ error: "Failed to fetch Categorys" });
+    console.error("Error fetching Categories:", error);
+    res.status(500).json({ error: "Failed to fetch Categories" });
   }
 };
 
 const getCategory = async (req, res) => {
   const { slug } = req.params;
   try {
-    const Category = await Category.findOne({ slug });
-    if (!Category) {
+    const category = await Category.findOne({ slug });
+    if (!category) {
       return res.status(404).send({ message: "Category not found" });
     }
-    res.json(Category);
+    res.json(category);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
