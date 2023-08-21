@@ -7,6 +7,7 @@ import { addCartItem } from "@/state/cartSlice";
 import { addWishItem, removeWishItem } from "@/state/wishlistSlice";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsCart, BsCartFill, BsTrash, BsTrashFill } from "react-icons/bs";
+import Image from "next/image";
 
 export default function Product({
   category,
@@ -63,12 +64,17 @@ export default function Product({
   const formatter = new Intl.NumberFormat("ar-SA-u-nu-latn", options);
 
   return (
-    <div className="xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded border border-boxBorderLightGray">
-      <img
-        src={`/images/${imgsSrc[0]}`}
-        alt={title}
-        className="w-full xs:w-auto"
-      />
+    <div className="xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] overflow-hidden rounded-lg border border-boxBorderLightGray shadow-lg">
+      <div className="relative aspect-video">
+        <Image
+          style={{
+            objectFit: "cover",
+          }}
+          src={`/images/${imgsSrc[0]}`}
+          alt={title}
+          fill
+        />
+      </div>
       <div>
         <div className="p-4 pt-2">
           <Link
@@ -88,10 +94,7 @@ export default function Product({
           </p>
         </div>
         <div className="p-4 border-t border-boxBorderLightGray flex justify-between">
-          <p>
-            السعر:
-            <span className="font-bold"> {formatter.format(price)}</span>
-          </p>
+          <span className="font-bold"> {formatter.format(price)}</span>
           <div className="flex gap-4">
             <button className="text-gray" onClick={handleItemAdd}>
               <BsCart />
