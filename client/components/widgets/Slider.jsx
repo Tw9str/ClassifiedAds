@@ -44,7 +44,7 @@ export default function Slider({ children, currentImg, totalImgs }) {
 
   return (
     <div
-      className="flex items-center justify-start gap-4 overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
+      className="flex items-center justify-start gap-2 overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
       ref={sliderRef}
     >
       {children}

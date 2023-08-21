@@ -1,9 +1,6 @@
-import Link from "next/link";
 import Section from "../widgets/Section";
 import SectionHead from "../widgets/SectionHead";
-import Image from "next/image";
 import CategoyBox from "../widgets/CategoyBox";
-import { useState } from "react";
 
 export default function Categories({ categoryList }) {
   return (
@@ -13,7 +10,7 @@ export default function Categories({ categoryList }) {
         linkTarget="categories"
         linkText="إظهار الكل"
       />
-      <div className="pt-6 flex flex-wrap gap-10 justify-start items-center">
+      <div className="flex flex-wrap gap-10 justify-center sm:justify-start items-center pt-6">
         {categoryList.slice(0, 12)?.map(({ title, imgSrc, adCount }, index) => (
           <CategoyBox
             key={index}
