@@ -1,12 +1,19 @@
 import CategoyBox from "@/components/widgets/CategoyBox";
 import Section from "@/components/widgets/Section";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function AllCategories({ categoryList }) {
   return (
     <Section>
-      <CategoyBox categoryList={categoryList} />
+      <div className="pt-6 flex flex-wrap gap-10 justify-start items-center">
+        {categoryList?.map(({ title, imgSrc, adCount }, index) => (
+          <CategoyBox
+            key={index}
+            title={title}
+            imgSrc={imgSrc}
+            adCount={adCount}
+          />
+        ))}
+      </div>
     </Section>
   );
 }

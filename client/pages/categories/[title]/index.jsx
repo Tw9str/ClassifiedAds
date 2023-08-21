@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function Title({ categoryAdList }) {
+export default function CategoryList({ categoryAdList }) {
   const [categoryAdArray, setCategoryAdArray] = useState(categoryAdList);
   const token = useSelector((state) => state.auth.token);
 
