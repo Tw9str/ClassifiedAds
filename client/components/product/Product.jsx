@@ -64,7 +64,7 @@ export default function Product({
   const formatter = new Intl.NumberFormat("ar-SA-u-nu-latn", options);
 
   return (
-    <div className="xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] overflow-hidden rounded-lg border border-boxBorderLightGray shadow-lg">
+    <div className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] overflow-hidden rounded-lg border border-boxBorderLightGray shadow-lg">
       <div className="relative aspect-video">
         <Image
           style={{
