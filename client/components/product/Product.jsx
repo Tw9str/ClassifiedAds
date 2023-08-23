@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { ImLocation } from "react-icons/im";
 import { FcApproval } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "@/state/cartSlice";
@@ -8,11 +7,12 @@ import { addWishItem, removeWishItem } from "@/state/wishlistSlice";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsCart, BsCartFill, BsTrash, BsTrashFill } from "react-icons/bs";
 import Image from "next/image";
+import Rating from "../widgets/Rating";
+import { FiTruck } from "react-icons/fi";
 
 export default function Product({
   category,
   title,
-  location,
   price,
   imgsSrc,
   id,
@@ -64,7 +64,7 @@ export default function Product({
   const formatter = new Intl.NumberFormat("ar-SA-u-nu-latn", options);
 
   return (
-    <div className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] overflow-hidden rounded-lg border border-boxBorderLightGray shadow-lg">
+    <div className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] overflow-hidden rounded-lg border border-borderColor shadow-lg">
       <div className="relative aspect-video">
         <Image
           style={{
@@ -76,24 +76,35 @@ export default function Product({
         />
       </div>
       <div>
-        <div className="p-4 pt-2">
-          <Link
-            href={`/categories/${category.title}`}
-            className="flex items-center gap-2 text-gray text-sm pb-2"
-          >
-            {category.title} <FcApproval />
-          </Link>
+        <div className="p-4">
+          <div className="flex justify-center items-center gap-2">
+            <Link
+              href={`/categories/${category.title}`}
+              className="flex items-center gap-2 text-gray text-sm"
+            >
+              {category.title} <FcApproval />
+            </Link>
+            <span className="text-sm">تم شراءه 5356</span>
+            <span className="text-sm">1236 تعليق</span>
+          </div>
           <Link
             href={`/item/${slug}`}
             className="font-bold hover:text-primaryColor transition"
           >
             {title}
           </Link>
-          <p className="flex items-center gap-2 text-gray py-2">
-            {location} <ImLocation />
-          </p>
+          <Rating />
+          <ul className="flex justify-center items-center gap-2">
+            <li>
+              <FiTruck />
+            </li>
+            <li>قولد</li>
+            <li>5 نجوم</li>
+            <li>ثقة</li>
+            <li>الأكثر مبيعاً</li>
+          </ul>
         </div>
-        <div className="p-4 border-t border-boxBorderLightGray flex justify-between">
+        <div className="p-4 border-t border-borderColor flex justify-between">
           <span className="font-bold"> {formatter.format(price)}</span>
           <div className="flex gap-4">
             <button className="text-gray" onClick={handleItemAdd}>

@@ -3,7 +3,6 @@ import { removeWishItem, closeWish } from "@/state/wishlistSlice";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineClose } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Section from "@/components/widgets/Section";
 
@@ -28,13 +27,6 @@ export default function Wishlist() {
     <Section>
       <div className="">
         <div className="">
-          <button
-            aria-label=""
-            className=""
-            onClick={() => dispatch(closeWish())}
-          >
-            <AiOutlineClose size={24} />
-          </button>
           <h2>المفضلة</h2>
           {items.length > 0 && (
             <div className="">

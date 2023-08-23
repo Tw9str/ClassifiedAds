@@ -13,9 +13,10 @@ module.exports = {
       bgGray: "#f7f8f9",
       gray: "#888888",
       lightGray: "#e1e1e1",
-      boxBorderLightGray: "#eee",
+      borderColor: "#eee",
       black: "#222222",
       white: "#ffffff",
+      star: "gold",
     },
     screens: {
       xs: "480px",

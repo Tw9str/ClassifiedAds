@@ -52,7 +52,7 @@ export default function Menu() {
             </Link>
           </li>
           <li>
-            <Link href="/manage">إدارة الحساب</Link>
+            <Link href="/profile/manage">إدارة الحساب</Link>
           </li>
           <li>
             <Link href={`/ads/${user.username}/${user._id}`}>إعلاناتي</Link>
