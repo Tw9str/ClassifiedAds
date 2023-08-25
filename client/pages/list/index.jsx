@@ -12,7 +12,7 @@ export default function List({ categoryList }) {
     imgs: [],
   });
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user?._id);
+  const userId = useSelector((state) => state.auth.user?._id);
 
   function handleFileChange(e) {
     const files = Array.from(e.target.files);
@@ -32,7 +32,7 @@ export default function List({ categoryList }) {
         formData.append(key, value);
       }
     }
-    formData.append(`user`, user);
+    formData.append(`userId`, userId);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/listing/add`,

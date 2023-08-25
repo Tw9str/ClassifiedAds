@@ -36,9 +36,18 @@ const adSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-adSchema.pre("save", function (next) {
-  this.slug = generateSlug(this.title, this.category, this._id);
-  next();
+adSchema.pre("save", async function (next) {
+  try {
+    const category = await mongoose.model("Category").findById(this.category);
+    if (!category) {
+      throw new Error("Category not found");
+    }
+
+    this.slug = generateSlug(this.title, category.title, this._id);
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 function generateSlug(title, category, _id) {

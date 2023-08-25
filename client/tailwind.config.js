@@ -16,6 +16,7 @@ module.exports = {
       borderColor: "#eee",
       black: "#222222",
       white: "#ffffff",
+      blue: "#3b82f6",
       star: "gold",
     },
     screens: {

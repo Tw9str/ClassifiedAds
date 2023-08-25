@@ -6,7 +6,11 @@ const fs = require("fs");
 
 const getAds = async (req, res) => {
   try {
-    const ads = await Ad.find().populate("category");
+    const ads = await Ad.find().populate("category").populate("user").lean();
+
+    ads.forEach((ad) => {
+      delete ad.user.password;
+    });
 
     res.json(ads);
   } catch (error) {
@@ -33,11 +37,17 @@ const getAd = async (req, res) => {
 const getUserAds = async (req, res) => {
   const { id } = req.params;
   try {
-    const ad = await Ad.find({ user: id }).populate("category");
-    if (!ad) {
+    const ads = await Ad.find({ user: id })
+      .populate("category")
+      .populate("user")
+      .lean();
+    if (!ads) {
       return res.status(404).send({ message: "Ad not found" });
     }
-    res.json(ad);
+    ads.forEach((ad) => {
+      delete ad.user.password;
+    });
+    res.json(ads);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -66,7 +76,7 @@ const getCategoryAds = async (req, res) => {
 };
 
 const addListing = async (req, res) => {
-  const { title, category, price, description, user } = req.body;
+  const { title, category, price, description, userId } = req.body;
   const imgsSrc = req.files?.map((file) => file.filename);
 
   const ad = new Ad({
@@ -75,7 +85,7 @@ const addListing = async (req, res) => {
     price,
     description,
     imgsSrc,
-    user,
+    user: userId,
   });
   try {
     await ad.save();

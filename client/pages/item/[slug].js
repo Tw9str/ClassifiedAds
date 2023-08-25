@@ -82,7 +82,10 @@ export default function ProductDetails({
               <AiOutlineTag />
             </span>
           </div>
-          <div className="flex flex-col border border-lightGray p-6 rounded bg-white items-center">
+          <Link
+            href={`/ads/${user.username}/${user._id}`}
+            className="flex flex-col border border-lightGray p-6 rounded bg-white items-center"
+          >
             <div className="w-24 h-24 overflow-hidden rounded-full relative">
               <Image
                 style={{ objectFit: "cover" }}
@@ -91,13 +94,8 @@ export default function ProductDetails({
                 fill
               />
             </div>
-            <Link
-              href={`/ads/${user.username}/${user._id}`}
-              className="font-semibold text-2xl pt-4"
-            >
-              {user.username}
-            </Link>
-          </div>
+            <span className="font-semibold text-2xl pt-4">{user.username}</span>
+          </Link>
         </div>
       </div>
       <SimilarAds />
