@@ -55,7 +55,7 @@ export default function Menu() {
             <Link href="/profile/manage">إدارة الحساب</Link>
           </li>
           <li>
-            <Link href={`/ads/${user.username}/${user._id}`}>إعلاناتي</Link>
+            <Link href={`/ads/${user.username}`}>إعلاناتي</Link>
           </li>
           <li>
             <button

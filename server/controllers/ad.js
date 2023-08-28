@@ -1,4 +1,5 @@
 const Ad = require("../models/ad");
+const User = require("../models/user");
 const Category = require("../models/category");
 const { promisify } = require("util");
 const { join } = require("path");
@@ -35,9 +36,13 @@ const getAd = async (req, res) => {
 };
 
 const getUserAds = async (req, res) => {
-  const { id } = req.params;
+  const { username } = req.params;
   try {
-    const ads = await Ad.find({ user: id })
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const ads = await Ad.find({ user: user._id })
       .populate("category")
       .populate("user")
       .lean();
@@ -61,14 +66,18 @@ const getCategoryAds = async (req, res) => {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    const ads = await Ad.find({ category: category._id });
+    const ads = await Ad.find({ category: category._id })
+      .populate("user")
+      .lean();
 
     if (!ads || ads.length === 0) {
       return res
         .status(404)
         .json({ message: "No ads found for this category" });
     }
-
+    ads.forEach((ad) => {
+      delete ad.user.password;
+    });
     res.json(ads);
   } catch (err) {
     res.status(500).json({ message: err.message });

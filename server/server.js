@@ -44,7 +44,7 @@ app.post("/api/auth/login", login);
 app.post("/api/auth/register", register);
 app.post("/api/listing/add", verifyToken, upload.array("imgs"), addListing);
 app.delete("/api/listing/delete/:id", verifyToken, verifyAdOwner, deleteAd);
-app.get("/api/user/:id/ads", getUserAds);
+app.get("/api/:username/ads", getUserAds);
 app.get("/api/ads", getAds);
 app.get("/api/ad/:slug", getAd);
 

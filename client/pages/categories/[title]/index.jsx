@@ -41,7 +41,7 @@ export default function CategoryList({ categoryAdList }) {
               imgsSrc,
               _id,
               slug,
-              userId,
+              user,
             } = ad;
             return (
               <Product
@@ -53,7 +53,7 @@ export default function CategoryList({ categoryAdList }) {
                 imgsSrc={imgsSrc}
                 id={_id}
                 slug={slug}
-                userId={userId}
+                user={user}
                 onAdRemove={handleAdDelete}
               />
             );

@@ -1,10 +1,10 @@
-import Product from "@/components/product/Product";
-import Section from "@/components/widgets/Section";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Product from "@/components/product/Product";
+import Section from "@/components/widgets/Section";
 
-export default function UserAds({ userAdsList }) {
-  const [userAds, setUserAds] = useState(userAdsList);
+export default function UserAds({ userAdList }) {
+  const [userAds, setUserAds] = useState(userAdList);
   const token = useSelector((state) => state.auth.token);
 
   async function handleAdDelete(id) {
@@ -28,47 +28,43 @@ export default function UserAds({ userAdsList }) {
     <Section>
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
         {userAds?.length > 0 &&
-          userAds?.map((ad, index) => {
-            const {
-              category,
-              title,
-              location,
-              price,
-              imgsSrc,
-              _id,
-              slug,
-              user,
-            } = ad;
-            return (
-              <Product
-                key={index}
-                category={category}
-                title={title}
-                location={location}
-                price={price}
-                imgsSrc={imgsSrc}
-                id={_id}
-                slug={slug}
-                user={user}
-                onAdRemove={handleAdDelete}
-              />
-            );
-          })}
+          userAds?.map(
+            (
+              { category, title, location, price, imgsSrc, _id, slug, user },
+              index
+            ) => {
+              return (
+                <Product
+                  key={index}
+                  category={category}
+                  title={title}
+                  location={location}
+                  price={price}
+                  imgsSrc={imgsSrc}
+                  id={_id}
+                  slug={slug}
+                  user={user}
+                  onAdRemove={handleAdDelete}
+                />
+              );
+            }
+          )}
       </div>
     </Section>
   );
 }
 
 export async function getServerSideProps(context) {
-  const id = context.query.userId;
+  const username = context.query.username;
   try {
     const adsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}/ads`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/${username}/ads`
     );
-    const userAdsList = await adsResponse.json();
+    const userAdList = await adsResponse.json();
+    console.log(userAdList);
     return {
       props: {
-        userAdsList,
+        userAdList,
       },
     };
   } catch (error) {

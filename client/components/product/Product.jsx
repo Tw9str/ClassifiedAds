@@ -77,7 +77,7 @@ export default function Product({
     <div className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded-lg border border-borderColor shadow-lg">
       <div className="flex flex-row-reverse justify-between items-center p-2">
         <Link
-          href={`/ads/${user.username}/${user._id}`}
+          href={`/ads/${user.username}`}
           className="flex flex-row-reverse justify-center items-center gap-2"
         >
           <div className="w-12 h-12 overflow-hidden rounded-full relative">

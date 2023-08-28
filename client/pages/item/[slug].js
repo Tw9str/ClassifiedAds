@@ -83,7 +83,7 @@ export default function ProductDetails({
             </span>
           </div>
           <Link
-            href={`/ads/${user.username}/${user._id}`}
+            href={`/ads/${user.username}`}
             className="flex flex-col border border-lightGray p-6 rounded bg-white items-center"
           >
             <div className="w-24 h-24 overflow-hidden rounded-full relative">
