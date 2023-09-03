@@ -31,7 +31,7 @@ export default function Register() {
   return (
     <div className="flex min-h-[calc(100vh-(94px+76px))] flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-secondary-900">
           تسجيل حساب جديد
         </h2>
       </div>
@@ -40,13 +40,13 @@ export default function Register() {
           <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-secondary-900"
             >
               اسم المستخدم
             </label>
             <div className="mt-2">
               <input
-                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
                 type="text"
                 name="username"
                 id="username"
@@ -62,13 +62,13 @@ export default function Register() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-secondary-900"
             >
               البريد الإلكتروني
             </label>
             <div className="mt-2">
               <input
-                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
                 type="text"
                 name="email"
                 id="email"
@@ -85,14 +85,14 @@ export default function Register() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-secondary-900"
               >
                 كلمة المرور
               </label>
               <div className="text-sm">
                 <a
                   href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  className="font-semibold text-primary-600 hover:text-primary-500"
                 >
                   إعادة تعيين كلمة المرور؟
                 </a>
@@ -105,7 +105,7 @@ export default function Register() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
                 value={inputValues.password}
                 onChange={(e) =>
                   setInputValues({ ...inputValues, password: e.target.value })
@@ -116,19 +116,19 @@ export default function Register() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-primaryColor px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-primary-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
             >
               تسجيل
             </button>
           </div>
-          {message && <p className="text-primaryColor">{message}</p>}
+          {message && <p className="text-primary-500">{message}</p>}
         </form>
-        <p className="mt-2 text-center text-sm text-gray-500">
+        <p className="mt-2 text-center text-sm text-secondary-900">
           مسجل بالفعل؟
           <Link
             href="/login"
-            className="font-semibold leading-6 text-primaryColor p-1
-            hover:text-indigo-500"
+            className="font-semibold leading-6 text-primary-500 p-1
+            hover:text-primary-600"
           >
             تسجيل الدخول
           </Link>

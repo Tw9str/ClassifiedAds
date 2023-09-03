@@ -17,7 +17,7 @@ const wishSlice = createSlice({
           id: newItem.id,
           title: newItem.title,
           price: newItem.price,
-          img: newItem.imagesPath,
+          img: newItem.imgsSrc,
           slug: newItem.slug,
         });
       }

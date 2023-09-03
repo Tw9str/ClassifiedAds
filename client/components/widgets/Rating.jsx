@@ -21,15 +21,15 @@ export default function Rating() {
     <div className="flex">
       {[1, 2, 3, 4, 5].map((star) => (
         <button
-          className="cursor-pointer transition"
+          className={`cursor-pointer duration-300 ${
+            hoveredRating >= star || selectedRating >= star
+              ? "text-star"
+              : "text-neutral-400"
+          }`}
           key={star}
           onClick={() => handleRatingClick(star)}
           onMouseEnter={() => handleRatingHover(star)}
           onMouseLeave={handleMouseLeave}
-          style={{
-            color:
-              hoveredRating >= star || selectedRating >= star ? "gold" : "gray",
-          }}
         >
           <AiFillStar />
         </button>

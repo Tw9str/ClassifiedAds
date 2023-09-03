@@ -58,22 +58,28 @@ export default function Cart() {
     minimumFractionDigits: 0,
   };
 
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
   return (
     <Section>
       <div className="">
         <h2>السلة</h2>
         {items.length > 0 && (
-          <div className="">
-            {items.map(({ id, title, price, quantity, img }) => (
-              <div className="" key={id}>
-                <Link href="" className="">
+          <div className="flex flex-wrap items-center justify-start py-6 gap-2">
+            {items.map(({ id, title, price, quantity, img, slug }) => (
+              <div
+                key={id}
+                className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded-lg border border-neutral-100 shadow-lg"
+              >
+                <Link
+                  href={`item/${slug}`}
+                  className="relative block aspect-video"
+                >
                   <Image
+                    style={{
+                      objectFit: "cover",
+                    }}
                     src={`/images/${img}`}
                     alt={title}
-                    width={200}
-                    height={200}
+                    fill
                   />
                 </Link>
                 <div className="">

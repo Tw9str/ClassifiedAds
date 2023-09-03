@@ -54,20 +54,20 @@ export default function List({ categoryList }) {
   return (
     <div className="container m-auto flex min-h-[calc(100vh-(94px+76px))] flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-secondary-900">
           أضف إعلان جديد
         </h2>
       </div>
       <form onSubmit={handleFormSubmit}>
         <label
           htmlFor="title"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-secondary-900"
         >
           العنوان
         </label>
         <div className="mt-2">
           <input
-            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
             type="text"
             name="title"
             id="title"
@@ -81,13 +81,13 @@ export default function List({ categoryList }) {
         </div>
         <label
           htmlFor="category"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-secondary-900"
         >
           الفئة
         </label>
         <div className="mt-2">
           <select
-            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
             type="text"
             name="category"
             id="category"
@@ -105,13 +105,13 @@ export default function List({ categoryList }) {
         </div>
         <label
           htmlFor="price"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-secondary-900"
         >
           السعر
         </label>
         <div className="mt-2">
           <input
-            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
             type="text"
             name="price"
             id="price"
@@ -125,13 +125,13 @@ export default function List({ categoryList }) {
         </div>
         <label
           htmlFor="imgs"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-secondary-900"
         >
           الصور
         </label>
         <div className="mt-2">
           <input
-            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
             type="file"
             name="imgs"
             id="imgs"
@@ -142,13 +142,13 @@ export default function List({ categoryList }) {
         </div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-secondary-900"
         >
           الوصف
         </label>
         <div className="mt-2">
           <textarea
-            className="block w-full h-40 resize-none rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray focus:outline-primaryColor sm:text-sm sm:leading-6"
+            className="block w-full h-40 resize-none rounded-md border-0 p-1.5 text-secondary-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-primary-500 sm:text-sm sm:leading-6"
             type="text"
             name="description"
             id="description"
@@ -160,11 +160,11 @@ export default function List({ categoryList }) {
             }
           />
         </div>
-        {meesage && <p className="text-primaryColor">{meesage}</p>}
+        {meesage && <p className="text-primary-500">{meesage}</p>}
         <div className="mt-2">
           <button
             type="submit"
-            className="flex w-32 justify-center rounded-md bg-primaryColor px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="flex w-32 justify-center rounded-md bg-primary-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           >
             تم
           </button>

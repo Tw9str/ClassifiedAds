@@ -11,7 +11,7 @@ export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="text-white relative">
+    <div className="text-secondary-50 relative">
       <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <div>
           <Image
@@ -25,7 +25,7 @@ export default function Menu() {
       </button>
 
       <div
-        className={`bg-black p-6 w-40 rounded-md absolute top-[100%] transition z-10 ${
+        className={`bg-neutral-800 p-6 w-40 rounded-md absolute top-[100%] duration-300 z-10 ${
           isMenuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -47,7 +47,7 @@ export default function Menu() {
             <Link href="/profile">الملف الشخصي</Link>
           </li>
           <li>
-            <Link href="/wishlist" className="text-white text-xl">
+            <Link href="/wishlist" className="text-secondary-50 text-xl">
               <FiHeart />
             </Link>
           </li>
@@ -59,7 +59,7 @@ export default function Menu() {
           </li>
           <li>
             <button
-              className="text-white text-xl"
+              className="text-secondary-50 text-xl"
               onClick={() => dispatch(setLogout())}
             >
               <FiUserX />

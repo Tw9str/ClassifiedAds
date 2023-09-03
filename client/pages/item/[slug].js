@@ -32,16 +32,16 @@ export default function ProductDetails({
     <Section>
       <div className="flex flex-col gap-6 mx-auto items-start flex-col md:flex-row">
         <div className="flex flex-col w-full gap-6 md:w-3/4">
-          <div className="relative p-6 flex gap-6 bg-white flex-col border border-lightGray rounded basis-1/2">
+          <div className="relative p-6 flex gap-6 bg-white flex-col border border-neutral-300 rounded basis-1/2">
             <div className="flex flex-col gap-4">
               <div>
-                <div className="flex gap-2 text-gray">
+                <div className="flex gap-2 text-secondary-500">
                   <span className="flex items-center gap-2 pl-2">
                     <AiOutlineClockCircle /> {createdAt}
                   </span>
                 </div>
               </div>
-              <h3 className="text-gray font-bold text-2xl">{title}</h3>
+              <h3 className="text-secondary-900 font-bold text-2xl">{title}</h3>
               <Options />
               <Slider>
                 {imgsSrc.map((img) => (
@@ -63,28 +63,29 @@ export default function ProductDetails({
               </Slider>
             </div>
           </div>
-          <div className="bg-white border border-lightGray p-6 rounded">
-            <h3 className="pb-6 font-medium">الوصف:</h3>
-            <p className="text-gray whitespace-pre-wrap">{description}</p>
+          <div className="bg-white border border-neutral-300 p-6 rounded">
+            <p className="text-secondary-600 whitespace-pre-wrap">
+              {description}
+            </p>
           </div>
         </div>
         <div className="flex w-full gap-6 md:w-1/4 flex-col">
-          <div className="overflow-hidden flex border border-lightGray p-6 rounded bg-white items-center gap-6">
-            <span className="border-l border-lightGray pl-6 text-5xl">
-              <AiOutlineTag className="text-[#cfd9e0]" />
+          <div className="overflow-hidden flex border border-neutral-300 p-6 rounded bg-white items-center gap-6">
+            <span className="border-l border-neutral-300 text-secondary-300 pl-6 text-5xl">
+              <AiOutlineTag />
             </span>
             <div className="flex flex-col">
-              <span className="text-primaryColor text-3xl font-bold">
+              <span className="text-primary-500 text-3xl font-bold">
                 {formatter.format(price)}
               </span>
             </div>
-            <span className="pl-6 text-7xl text-[#cfd9e0] opacity-30 -left-8 -bottom-4">
+            <span className="pl-6 text-7xl text-secondary-300 opacity-30">
               <AiOutlineTag />
             </span>
           </div>
           <Link
             href={`/ads/${user.username}`}
-            className="flex flex-col border border-lightGray p-6 rounded bg-white items-center"
+            className="flex flex-col border border-neutral-300 p-6 rounded bg-white items-center"
           >
             <div className="w-24 h-24 overflow-hidden rounded-full relative">
               <Image
@@ -94,7 +95,9 @@ export default function ProductDetails({
                 fill
               />
             </div>
-            <span className="font-semibold text-2xl pt-4">{user.username}</span>
+            <span className="text-secondary-900 font-semibold text-2xl pt-4">
+              {user.username}
+            </span>
           </Link>
         </div>
       </div>

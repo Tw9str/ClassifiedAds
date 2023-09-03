@@ -17,7 +17,7 @@ export default function Wishlist() {
 
   const options = {
     style: "currency",
-    currency: "EUR",
+    currency: "SAR",
     minimumFractionDigits: 0,
   };
 
@@ -29,20 +29,29 @@ export default function Wishlist() {
         <div className="">
           <h2>المفضلة</h2>
           {items.length > 0 && (
-            <div className="">
+            <div className="flex flex-wrap items-center justify-start py-6 gap-2">
               {items.map(({ id, title, price, img, slug }) => (
-                <div className="" key={id}>
-                  <Link href={`/shop/${slug}`} className="">
-                    {/* <Image
-                    src={`${API_URL}/assets/imgs/${img}`}
-                    alt={title}
-                    fill
-                  /> */}
+                <div
+                  key={id}
+                  className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded-lg border border-neutral-100 shadow-lg"
+                >
+                  <Link
+                    href={`item/${slug}`}
+                    className="relative block aspect-video"
+                  >
+                    <Image
+                      style={{
+                        objectFit: "cover",
+                      }}
+                      src={`/images/${img}`}
+                      alt={title}
+                      fill
+                    />
                   </Link>
                   <div className="">
                     <h3 className="">{title}</h3>
                     <p className="">
-                      {price.toLocaleString("nl-NL", options) + ",-"}
+                      {price.toLocaleString("ar-SA-u-nu-latn", options)}
                     </p>
                   </div>
                   <button aria-label="" onClick={() => handleItemRemove(id)}>

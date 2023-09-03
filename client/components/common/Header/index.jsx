@@ -41,7 +41,7 @@ export default function Header() {
               <Menu />
             )}
             <Link href="/cart" className="text-white text-xl">
-              <AiOutlineShoppingCart />
+              <AiOutlineShoppingCart size={24} />
             </Link>
           </div>
         </div>
