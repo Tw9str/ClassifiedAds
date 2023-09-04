@@ -35,6 +35,25 @@ const getAd = async (req, res) => {
   }
 };
 
+const getRelatedAds = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const relatedAds = await Ad.find({ category })
+      .populate("category")
+      .populate("user")
+      .lean();
+    if (!relatedAds) {
+      return res.status(404).send({ message: "No relatedAds found" });
+    }
+    relatedAds.forEach((ad) => {
+      delete ad.user.password;
+    });
+    res.json(relatedAds);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const getUserAds = async (req, res) => {
   const { username } = req.params;
   try {
@@ -148,6 +167,7 @@ const deleteAd = async (req, res) => {
 module.exports = {
   getAds,
   getAd,
+  getRelatedAds,
   getUserAds,
   getCategoryAds,
   addListing,

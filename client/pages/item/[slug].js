@@ -7,6 +7,7 @@ import Slider from "@/components/widgets/Slider";
 import Section from "@/components/widgets/Section";
 
 export default function ProductDetails({
+  relatedAds,
   ad: {
     category,
     createdAt,
@@ -85,9 +86,9 @@ export default function ProductDetails({
           </div>
           <Link
             href={`/ads/${user.username}`}
-            className="flex flex-col border border-neutral-300 p-6 rounded bg-white items-center"
+            className="flex flex-col border border-neutral-300 p-6 rounded bg-white items-center group"
           >
-            <div className="w-24 h-24 overflow-hidden rounded-full relative">
+            <div className="w-24 h-24 overflow-hidden rounded-full relative group-hover:scale-110 duration-300">
               <Image
                 style={{ objectFit: "cover" }}
                 src={`/images/${imgsSrc[0]}`}
@@ -95,13 +96,13 @@ export default function ProductDetails({
                 fill
               />
             </div>
-            <span className="text-secondary-900 font-semibold text-2xl pt-4">
+            <span className="text-secondary-900 font-semibold text-2xl pt-4 group-hover:text-primary-500 duration-300">
               {user.username}
             </span>
           </Link>
         </div>
       </div>
-      <SimilarAds />
+      <SimilarAds relatedAds={relatedAds} currentId={_id} />
     </Section>
   );
 }
@@ -113,9 +114,15 @@ export async function getServerSideProps(context) {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ad/${slug}`
     );
     const ad = await adResponse.json();
+
+    const relatedAdsResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ads/${ad.category}`
+    );
+    const relatedAds = await relatedAdsResponse.json();
     return {
       props: {
         ad,
+        relatedAds,
       },
     };
   } catch (error) {
@@ -123,6 +130,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         ad: null,
+        relatedAds: null,
         error: "Failed to fetch data",
       },
     };

@@ -12,6 +12,7 @@ const {
   deleteAd,
   getAd,
   getCategoryAds,
+  getRelatedAds,
 } = require("./controllers/ad");
 const verifyToken = require("./middleware/auth");
 const verifyAdOwner = require("./middleware/verifyAdOwner");
@@ -47,6 +48,7 @@ app.delete("/api/listing/delete/:id", verifyToken, verifyAdOwner, deleteAd);
 app.get("/api/:username/ads", getUserAds);
 app.get("/api/ads", getAds);
 app.get("/api/ad/:slug", getAd);
+app.get("/api/ads/:category", getRelatedAds);
 
 /* Server */
 const DB_URI = process.env.DB_URI;

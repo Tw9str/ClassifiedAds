@@ -61,7 +61,6 @@ export async function getServerSideProps(context) {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/${username}/ads`
     );
     const userAdList = await adsResponse.json();
-    console.log(userAdList);
     return {
       props: {
         userAdList,
