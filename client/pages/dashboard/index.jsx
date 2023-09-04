@@ -1,10 +1,10 @@
 import ManageCategories from "@/components/dashboard/ManageCategories";
-import Section from "@/components/widgets/Section";
+import Page from "@/components/widgets/Page";
 
 export default function Dashboard() {
   return (
-    <Section>
+    <Page>
       <ManageCategories />
-    </Section>
+    </Page>
   );
 }

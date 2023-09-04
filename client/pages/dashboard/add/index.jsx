@@ -1,10 +1,10 @@
 import Form from "@/components/dashboard/add/Form";
-import Section from "@/components/widgets/Section";
+import Page from "@/components/widgets/Page";
 
 export default function Add() {
   return (
-    <Section>
+    <Page>
       <Form />
-    </Section>
+    </Page>
   );
 }

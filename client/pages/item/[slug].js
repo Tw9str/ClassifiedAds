@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { AiOutlineClockCircle, AiOutlineTag } from "react-icons/ai";
-import Options from "@/components/product/Options";
-import SimilarAds from "@/components/product/SimilarAds";
 import Image from "next/image";
+import Page from "@/components/widgets/Page";
+import Options from "@/components/product/Options";
 import Slider from "@/components/widgets/Slider";
-import Section from "@/components/widgets/Section";
+import SimilarAds from "@/components/product/SimilarAds";
 
 export default function ProductDetails({
   relatedAds,
@@ -30,7 +30,7 @@ export default function ProductDetails({
   const formatter = new Intl.NumberFormat("ar-SA-u-nu-latn", options);
 
   return (
-    <Section>
+    <Page>
       <div className="flex flex-col gap-6 mx-auto items-start flex-col md:flex-row">
         <div className="flex flex-col w-full gap-6 md:w-3/4">
           <div className="relative p-6 flex gap-6 bg-white flex-col border border-neutral-300 rounded basis-1/2">
@@ -38,7 +38,15 @@ export default function ProductDetails({
               <div>
                 <div className="flex gap-2 text-secondary-500">
                   <span className="flex items-center gap-2 pl-2">
-                    <AiOutlineClockCircle /> {createdAt}
+                    <AiOutlineClockCircle />
+                    {new Date(createdAt).toLocaleString("ar-Ar", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "numeric",
+                      second: "numeric",
+                    })}
                   </span>
                 </div>
               </div>
@@ -103,7 +111,7 @@ export default function ProductDetails({
         </div>
       </div>
       <SimilarAds relatedAds={relatedAds} currentId={_id} />
-    </Section>
+    </Page>
   );
 }
 

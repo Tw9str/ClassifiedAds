@@ -1,9 +1,9 @@
-import Section from "@/components/widgets/Section";
+import Page from "@/components/widgets/Page";
 
 export default function Profile() {
   return (
-    <Section>
+    <Page>
       <div>Profile</div>
-    </Section>
+    </Page>
   );
 }

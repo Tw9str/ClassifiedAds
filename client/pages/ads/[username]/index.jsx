@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Page from "@/components/widgets/Page";
 import Product from "@/components/product/Product";
-import Section from "@/components/widgets/Section";
 
 export default function UserAds({ userAdList }) {
   const [userAds, setUserAds] = useState(userAdList);
@@ -25,7 +25,10 @@ export default function UserAds({ userAdList }) {
   }
 
   return (
-    <Section>
+    <Page>
+      <h1 className="text-center text-3xl font-bold">
+        إعلانات {userAds[0].user.username}
+      </h1>
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
         {userAds?.length > 0 &&
           userAds?.map(
@@ -50,7 +53,7 @@ export default function UserAds({ userAdList }) {
             }
           )}
       </div>
-    </Section>
+    </Page>
   );
 }
 

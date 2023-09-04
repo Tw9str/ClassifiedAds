@@ -1,9 +1,10 @@
 import CategoyBox from "@/components/widgets/CategoyBox";
-import Section from "@/components/widgets/Section";
+import Page from "@/components/widgets/Page";
 
 export default function AllCategories({ categoryList }) {
   return (
-    <Section>
+    <Page>
+      <h1 className="text-center text-3xl font-bold">الفئات</h1>
       <div className="flex flex-wrap gap-10 justify-center items-center pt-6">
         {categoryList?.map(({ title, imgSrc, adCount }, index) => (
           <CategoyBox
@@ -14,7 +15,7 @@ export default function AllCategories({ categoryList }) {
           />
         ))}
       </div>
-    </Section>
+    </Page>
   );
 }
 

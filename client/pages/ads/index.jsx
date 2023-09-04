@@ -1,6 +1,6 @@
 import Ads from "@/components/home/Ads";
 import Product from "@/components/product/Product";
-import Section from "@/components/widgets/Section";
+import Page from "@/components/widgets/Page";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -26,7 +26,8 @@ export default function AllAds({ adList }) {
   }
 
   return (
-    <Section>
+    <Page>
+      <h1 className="text-center text-3xl font-bold">الإعلانات</h1>
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2">
         {ads?.map(
           (
@@ -50,7 +51,7 @@ export default function AllAds({ adList }) {
           }
         )}
       </div>
-    </Section>
+    </Page>
   );
 }
 

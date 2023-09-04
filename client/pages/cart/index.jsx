@@ -1,16 +1,15 @@
+import Page from "@/components/widgets/Page";
 import { useSelector, useDispatch } from "react-redux";
 import {
   increaseItemQuantity,
   decreaseItemQuantity,
   removeCartItem,
-  closeCart,
 } from "@/state/cartSlice";
 // import { loadStripe } from "@stripe/stripe-js";
+import { BiPlus, BiMinus } from "react-icons/bi";
+import { FiTrash } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { FaRegTrashAlt } from "react-icons/fa";
-import Section from "@/components/widgets/Section";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -59,79 +58,96 @@ export default function Cart() {
   };
 
   return (
-    <Section>
-      <div className="">
-        <h2>السلة</h2>
+    <Page>
+      <h2 className="text-center text-3xl font-bold">السلة</h2>
+      <div className="flex flex-col md:flex-row-reverse gap-4 py-6">
         {items.length > 0 && (
-          <div className="flex flex-wrap items-center justify-start py-6 gap-2">
+          <div className="flex flex-wrap items-center justify-start gap-2 w-full">
             {items.map(({ id, title, price, quantity, img, slug }) => (
               <div
                 key={id}
-                className="w-full xs:w-[calc(100%/2-4px)] md:w-[calc(100%/3-6px)] lg:w-[calc(100%/4-6px)] rounded-lg border border-neutral-100 shadow-lg"
+                className="w-full xs:w-[calc(100%/2-4px)] lg:w-[calc(100%/3-6px)] rounded-lg border border-neutral-100 shadow-lg"
               >
                 <Link
                   href={`item/${slug}`}
-                  className="relative block aspect-video"
+                  className="relative block aspect-video overflow-hidden group"
                 >
                   <Image
-                    style={{
-                      objectFit: "cover",
-                    }}
+                    className="object-cover group-hover:scale-110 duration-300"
                     src={`/images/${img}`}
                     alt={title}
                     fill
                   />
                 </Link>
-                <div className="">
-                  <h3 className="">{title}</h3>
-                  <p className="">
+                <div className="p-2">
+                  <h2 className="font-bold text-secondary-900 hover:text-primary-500 duration-300">
+                    {title}
+                  </h2>
+                  <span className="font-bold text-lg text-primary-500">
                     {price.toLocaleString("ar-SA-u-nu-latn", options)}
-                  </p>
+                  </span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-1 items-center">
+                      <button
+                        className="group"
+                        aria-label="Less"
+                        onClick={() => handleItemDecrease(id)}
+                      >
+                        <BiMinus
+                          size={24}
+                          className="group-hover:scale-110 group-hover:text-primary-500 duration-300"
+                        />
+                      </button>
+                      <span className="font-bold text-lg">{quantity}</span>
+                      <button
+                        className="group"
+                        aria-label="More"
+                        onClick={() => handleItemIncrease(id)}
+                      >
+                        <BiPlus
+                          size={24}
+                          className="group-hover:scale-110 group-hover:text-primary-500 duration-300"
+                        />
+                      </button>
+                    </div>
+                    <button
+                      className="group"
+                      aria-label="Remove"
+                      onClick={() => handleItemRemove(id)}
+                    >
+                      <FiTrash
+                        size={24}
+                        className="text-neutral-400 group-hover:scale-110 group-hover:text-primary-500 duration-300"
+                      />
+                    </button>
+                  </div>
                 </div>
-                <div className="">
-                  <button
-                    aria-label="Less"
-                    onClick={() => handleItemDecrease(id)}
-                  >
-                    <AiOutlineMinus />
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    aria-label="More"
-                    onClick={() => handleItemIncrease(id)}
-                  >
-                    <AiOutlinePlus />
-                  </button>
-                </div>
-                <button
-                  aria-label="Remove"
-                  onClick={() => handleItemRemove(id)}
-                >
-                  <FaRegTrashAlt />
-                </button>
               </div>
             ))}
           </div>
         )}
         {items.length > 0 && (
-          <div className="">
-            <p className="">
+          <div className="flex flex-col justify-center gap-4 w-full md:w-96 h-56 bg-neutral-100 p-4 rounded-lg">
+            <p className="flex items-center justify-between font-bold">ملخص:</p>
+            <p className="flex items-center justify-between font-bold border-b pb-4">
               العناصر ({totalQuantity})
-              <span>
+              <span className="font-bold">
                 {totalPrice?.toLocaleString("ar-SA-u-nu-latn", options)}
               </span>
             </p>
-            <p className="">
+            <p className="flex items-center justify-between font-bold">
               المبلغ الإجمالي:
-              <span>
+              <span className="font-bold">
                 {totalPrice?.toLocaleString("ar-SA-u-nu-latn", options)}
               </span>
             </p>
-            <button className="">شراء</button>
+            <button className="flex w-32 justify-center rounded-md bg-primary-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 duration-300">
+              الدفع
+            </button>
           </div>
         )}
-        {items.length === 0 && <p>لم تقف بإضافة عناصر الى السلة</p>}
       </div>
-    </Section>
+      {items.length === 0 && <p>لم تقف بإضافة عناصر الى السلة</p>}
+    </Page>
   );
 }

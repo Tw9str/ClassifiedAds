@@ -1,5 +1,5 @@
 import Product from "@/components/product/Product";
-import Section from "@/components/widgets/Section";
+import Page from "@/components/widgets/Page";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -28,8 +28,10 @@ export default function CategoryList({ categoryAdList }) {
     }
   }
   return (
-    <Section>
-      <h1>{title?.replace("-", " ")}</h1>
+    <Page>
+      <h1 className="text-center text-3xl font-bold">
+        {title?.replace("-", " ")}
+      </h1>
       <div className="flex flex-wrap items-center justify-start pt-6 gap-2">
         {categoryAdArray.length > 0 &&
           categoryAdArray?.map((ad, index) => {
@@ -59,7 +61,7 @@ export default function CategoryList({ categoryAdList }) {
             );
           })}
       </div>
-    </Section>
+    </Page>
   );
 }
 

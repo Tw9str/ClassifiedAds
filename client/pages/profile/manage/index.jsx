@@ -1,10 +1,9 @@
-import Section from "@/components/widgets/Section";
-import React from "react";
+import Page from "@/components/widgets/Page";
 
 export default function Manage() {
   return (
-    <Section>
+    <Page>
       <div>Manage</div>
-    </Section>
+    </Page>
   );
 }
