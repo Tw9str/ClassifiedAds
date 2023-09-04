@@ -20,7 +20,7 @@ import { FaStar } from "react-icons/fa";
 import { FiTrash } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
-import Rating from "../widgets/Rating";
+import Rating from "./Rating";
 import Tooltip from "../widgets/Tooltip";
 
 export default function Product({

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 
-export default function Rating() {
+export default function SubmitRating() {
   const [hoveredRating, setHoveredRating] = useState(0);
   const [selectedRating, setSelectedRating] = useState(0);
 

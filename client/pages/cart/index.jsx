@@ -66,7 +66,7 @@ export default function Cart() {
             {items.map(({ id, title, price, quantity, img, slug }) => (
               <div
                 key={id}
-                className="w-full xs:w-[calc(100%/2-4px)] lg:w-[calc(100%/3-6px)] rounded-lg border border-neutral-100 shadow-lg"
+                className="w-full xs:w-[calc(100%/2-4px)] lg:w-[calc(100%/3-6px)] rounded-lg border border-neutral-100 shadow-lg duration-300"
               >
                 <Link
                   href={`item/${slug}`}
@@ -113,7 +113,9 @@ export default function Cart() {
                     <button
                       className="group"
                       aria-label="Remove"
-                      onClick={() => handleItemRemove(id)}
+                      onClick={() => {
+                        handleItemRemove(id);
+                      }}
                     >
                       <FiTrash
                         size={24}
@@ -127,7 +129,7 @@ export default function Cart() {
           </div>
         )}
         {items.length > 0 && (
-          <div className="flex flex-col justify-center gap-4 w-full md:w-96 h-56 bg-neutral-100 p-4 rounded-lg">
+          <div className="flex flex-col justify-center gap-4 w-full md:w-96 h-56 bg-secondary-100 p-4 rounded-lg">
             <p className="flex items-center justify-between font-bold">ملخص:</p>
             <p className="flex items-center justify-between font-bold border-b pb-4">
               العناصر ({totalQuantity})

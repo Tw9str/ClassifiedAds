@@ -87,6 +87,7 @@ const getCategoryAds = async (req, res) => {
 
     const ads = await Ad.find({ category: category._id })
       .populate("user")
+      .populate("category")
       .lean();
 
     if (!ads || ads.length === 0) {

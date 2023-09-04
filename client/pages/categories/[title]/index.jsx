@@ -8,6 +8,8 @@ export default function CategoryList({ categoryAdList }) {
   const [categoryAdArray, setCategoryAdArray] = useState(categoryAdList);
   const token = useSelector((state) => state.auth.token);
 
+  console.log(categoryAdArray);
+
   const router = useRouter();
   const { title } = router.query;
 
