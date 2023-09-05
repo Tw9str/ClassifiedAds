@@ -130,16 +130,16 @@ export default function Cart() {
         )}
         {items.length > 0 && (
           <div className="flex flex-col justify-center gap-4 w-full md:w-96 h-56 bg-secondary-100 p-4 rounded-lg">
-            <p className="flex items-center justify-between font-bold">ملخص:</p>
-            <p className="flex items-center justify-between font-bold border-b pb-4">
+            <p className="flex items-center justify-between text-lg">ملخص:</p>
+            <p className="flex items-center justify-between text-lg border-b pb-4">
               العناصر ({totalQuantity})
-              <span className="font-bold">
+              <span className="text-lg">
                 {totalPrice?.toLocaleString("ar-SA-u-nu-latn", options)}
               </span>
             </p>
-            <p className="flex items-center justify-between font-bold">
+            <p className="flex items-center justify-between text-lg">
               المبلغ الإجمالي:
-              <span className="font-bold">
+              <span className="text-lg">
                 {totalPrice?.toLocaleString("ar-SA-u-nu-latn", options)}
               </span>
             </p>

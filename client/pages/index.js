@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import Categories from "@/components/home/Categories";
 import Ads from "@/components/home/Ads";
+import NotificationAlert from "@/components/widgets/NotificationAlert";
 
 export default function Home({ categoryList, adList }) {
   return (
@@ -8,6 +9,10 @@ export default function Home({ categoryList, adList }) {
       <Hero />
       <Categories categoryList={categoryList} />
       <Ads adList={adList} />
+      <NotificationAlert
+        text="تم الاضافة الى السلة!"
+        linkText="المتابعة الى الدفع"
+      />
     </>
   );
 }

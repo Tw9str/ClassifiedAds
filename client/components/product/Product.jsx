@@ -97,7 +97,7 @@ export default function Product({
           </span>
         </Link>
         <Tooltip text="موثق بسجل من وزارة التجارة">
-          <MdOutlineVerified className="text-accent-600" size={32} />
+          <MdOutlineVerified className="text-accent-blue-600" size={32} />
         </Tooltip>
       </div>
       <Link href={`/item/${slug}`}>
@@ -181,12 +181,15 @@ export default function Product({
           </li>
           <li>
             <Tooltip text="موثوق من قبل العملاء">
-              <MdOutlineVerifiedUser className="text-accent-600" size={24} />
+              <MdOutlineVerifiedUser
+                className="text-accent-blue-600"
+                size={24}
+              />
             </Tooltip>
           </li>
           <li>
             <Tooltip text="الأكثر مبيعاً">
-              <RiMedal2Fill className="text-accent-600" size={24} />
+              <RiMedal2Fill className="text-accent-blue-600" size={24} />
             </Tooltip>
           </li>
         </ul>
@@ -205,7 +208,7 @@ export default function Product({
             </button>
           )}
           <button
-            className="flex gap-2 items-center bg-accent-600 hover:bg-accent-500 px-4 py-2 rounded-lg shadow-lg group duration-300"
+            className="flex gap-2 items-center bg-accent-blue-600 hover:bg-accent-blue-500 px-4 py-2 rounded-lg shadow-lg group duration-300"
             onClick={handleItemAdd}
           >
             <AiOutlineShoppingCart
