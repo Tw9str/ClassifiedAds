@@ -9,10 +9,6 @@ export default function Home({ categoryList, adList }) {
       <Hero />
       <Categories categoryList={categoryList} />
       <Ads adList={adList} />
-      <NotificationAlert
-        text="تم الاضافة الى السلة!"
-        linkText="المتابعة الى الدفع"
-      />
     </>
   );
 }
