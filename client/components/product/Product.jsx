@@ -22,6 +22,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Rating from "./Rating";
 import Tooltip from "../widgets/Tooltip";
+import NotificationAlert from "../widgets/NotificationAlert";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Product({
   category,
@@ -33,9 +36,15 @@ export default function Product({
   user,
   onAdRemove,
 }) {
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const [notificationText, setNotificationText] = useState({
+    text: "تم الحذف بنجاح!",
+    linkText: "",
+  });
   const currentUserId = useSelector((state) => state.auth.user?._id);
   const dispatch = useDispatch();
   const items = useSelector((state) => state.wishlist.items);
+  const isInWishlist = items.some((item) => item.id === id);
 
   const item = {
     id,
@@ -45,28 +54,61 @@ export default function Product({
     slug,
   };
 
+  useEffect(() => {
+    const notificationTimeout = setTimeout(() => {
+      setIsNotificationVisible(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(notificationTimeout);
+    };
+  }, [isNotificationVisible]);
+
   function handleItemAdd() {
     dispatch(
       addCartItem({
         newItem: item,
       })
     );
+    setIsNotificationVisible(true);
+    setNotificationText({
+      text: "تم الإضافة الى السلة!",
+      linkText: "الإستمرار الى الدفع.",
+    });
+  }
+
+  function handleNotificationClose() {
+    setIsNotificationVisible(false);
   }
 
   function handleFavClick() {
-    if (items.some((item) => item.id === id)) {
+    setIsNotificationVisible(true);
+    if (isInWishlist) {
       dispatch(
         removeWishItem({
           id,
         })
       );
+      setNotificationText({
+        text: "تمت الإزالة من المفضلة!",
+        linkText: "",
+      });
     } else {
       dispatch(
         addWishItem({
           newItem: item,
         })
       );
+      setNotificationText({
+        text: "تم الإضافة الى المفضلة!",
+        linkText: "",
+      });
     }
+  }
+
+  function handleRemoveProduct() {
+    onAdRemove(id);
+    setIsNotificationVisible(true);
   }
 
   const options = {
@@ -146,10 +188,17 @@ export default function Product({
             >
               1200
               <Tooltip text="الإعجابات">
-                <AiOutlineHeart
-                  size={24}
-                  className="text-neutral-400 group-hover:scale-110 group-hover:text-primary-500 duration-300"
-                />
+                {isInWishlist ? (
+                  <AiFillHeart
+                    size={24}
+                    className="text-primary-600 group-hover:scale-110 group-hover:text-primary-500 duration-300"
+                  />
+                ) : (
+                  <AiOutlineHeart
+                    size={24}
+                    className="text-neutral-400 group-hover:scale-110 group-hover:text-primary-500 duration-300"
+                  />
+                )}
               </Tooltip>
             </button>
           </div>
@@ -200,7 +249,7 @@ export default function Product({
         </span>
         <div className="flex gap-4">
           {currentUserId === user._id && (
-            <button className="group" onClick={() => onAdRemove(id)}>
+            <button className="group" onClick={handleRemoveProduct}>
               <FiTrash
                 size={24}
                 className="text-neutral-400 group-hover:scale-110 group-hover:text-primary-500 duration-300"
@@ -218,6 +267,13 @@ export default function Product({
           </button>
         </div>
       </div>
+      {isNotificationVisible && (
+        <NotificationAlert
+          text={notificationText.text}
+          linkText={notificationText.linkText}
+          onNotificationClose={handleNotificationClose}
+        />
+      )}
     </div>
   );
 }

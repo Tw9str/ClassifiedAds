@@ -4,7 +4,7 @@ import { removeWishItem, closeWish } from "@/state/wishlistSlice";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export default function Wishlist() {
   const dispatch = useDispatch();
@@ -55,9 +55,9 @@ export default function Wishlist() {
                     aria-label="remove"
                     onClick={() => handleItemRemove(id)}
                   >
-                    <AiOutlineHeart
+                    <AiFillHeart
                       size={24}
-                      className="text-neutral-400 group-hover:scale-110 group-hover:text-primary-500 duration-300"
+                      className="text-primary-600 group-hover:scale-110 group-hover:text-primary-500 duration-300"
                     />
                   </button>
                 </div>
