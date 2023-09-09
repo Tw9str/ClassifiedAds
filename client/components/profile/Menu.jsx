@@ -2,7 +2,7 @@ import { useState } from "react";
 import { setLogout } from "@/state/authSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { FiHeart, FiUserX } from "react-icons/fi";
+import { FiUserX } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Menu() {
@@ -45,11 +45,6 @@ export default function Menu() {
         <ul>
           <li>
             <Link href="/profile">الملف الشخصي</Link>
-          </li>
-          <li>
-            <Link href="/wishlist" className="text-secondary-50 text-xl">
-              <FiHeart />
-            </Link>
           </li>
           <li>
             <Link href="/profile/manage">إدارة الحساب</Link>

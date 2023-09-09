@@ -11,6 +11,7 @@ export default function List({ categoryList }) {
     description: "",
     imgs: [],
   });
+  console.log(inputValues);
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.user?._id);
 
@@ -98,8 +99,17 @@ export default function List({ categoryList }) {
               setInputValues({ ...inputValues, category: e.target.value })
             }
           >
+            <option value="" disabled>
+              اختر فئة
+            </option>
             {categoryList.map((category) => (
-              <option value={category._id}>{category.title}</option>
+              <option
+                key={category._id}
+                className="text-secondary-900"
+                value={category._id}
+              >
+                {category.title}
+              </option>
             ))}
           </select>
         </div>

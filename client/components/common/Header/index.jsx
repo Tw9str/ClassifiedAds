@@ -2,13 +2,21 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Menu from "@/components/profile/Menu";
 import { FiUser } from "react-icons/fi";
-import { AiOutlinePlus, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlinePlus,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 export default function Header() {
   const router = useRouter();
 
   const token = useSelector((state) => state.auth.token);
+  const { cartCount, wishlistCount } = useSelector((state) => ({
+    cartCount: state.cart.items.length,
+    wishlistCount: state.wishlist.items.length,
+  }));
 
   const isHomePage = router.pathname === "/";
 
@@ -40,8 +48,24 @@ export default function Header() {
             ) : (
               <Menu />
             )}
-            <Link href="/cart" className="text-white text-xl">
+            <Link href="/cart" className="relative text-secondary-50 text-xl">
+              {cartCount > 0 && (
+                <span className="absolute w-6 h-6 text-white bg-primary-500 text-sm rounded-full bottom-5 left-3 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
               <AiOutlineShoppingCart size={24} />
+            </Link>
+            <Link
+              href="/wishlist"
+              className="relative text-secondary-50 text-xl"
+            >
+              {wishlistCount > 0 && (
+                <span className="absolute w-6 h-6 text-white bg-primary-500 text-sm rounded-full bottom-5 left-3 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+              <AiOutlineHeart size={24} />
             </Link>
           </div>
         </div>

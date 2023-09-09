@@ -6,6 +6,7 @@ import {
   AiOutlineHeart,
   AiFillHeart,
   AiOutlineShoppingCart,
+  AiOutlineCheck,
 } from "react-icons/ai";
 import {
   MdOutlineSell,
@@ -43,8 +44,10 @@ export default function Product({
   });
   const currentUserId = useSelector((state) => state.auth.user?._id);
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.wishlist.items);
-  const isInWishlist = items.some((item) => item.id === id);
+  const { isInCart, isInWishlist } = useSelector((state) => ({
+    isInCart: state.cart.items.some((item) => item.id === id),
+    isInWishlist: state.wishlist.items.some((item) => item.id === id),
+  }));
 
   const item = {
     id,
@@ -57,7 +60,7 @@ export default function Product({
   useEffect(() => {
     const notificationTimeout = setTimeout(() => {
       setIsNotificationVisible(false);
-    }, 3000);
+    }, 1000);
 
     return () => {
       clearTimeout(notificationTimeout);
@@ -257,13 +260,18 @@ export default function Product({
             </button>
           )}
           <button
-            className="flex gap-2 items-center bg-accent-blue-600 hover:bg-accent-blue-500 px-4 py-2 rounded-lg shadow-lg group duration-300"
+            className="flex gap-2 items-center bg-accent-blue-600 hover:bg-accent-blue-500 disabled:bg-neutral-300 px-4 py-2 rounded-lg shadow-lg group duration-300"
             onClick={handleItemAdd}
+            disabled={isInCart}
           >
-            <AiOutlineShoppingCart
-              size={24}
-              className="text-neutral-50 group-hover:scale-110 duration-300"
-            />
+            {isInCart ? (
+              <AiOutlineCheck size={24} className="text-neutral-50" />
+            ) : (
+              <AiOutlineShoppingCart
+                size={24}
+                className="text-neutral-50 group-hover:scale-110 duration-300"
+              />
+            )}
           </button>
         </div>
       </div>
@@ -272,6 +280,7 @@ export default function Product({
           text={notificationText.text}
           linkText={notificationText.linkText}
           onNotificationClose={handleNotificationClose}
+          isAdding={notificationText.text.includes("إضافة")}
         />
       )}
     </div>

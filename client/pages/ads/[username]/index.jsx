@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Page from "@/components/widgets/Page";
 import Product from "@/components/product/Product";
+import { useRouter } from "next/router";
+import AlertMessage from "@/components/widgets/AlertMessage";
 
 export default function UserAds({ userAdList }) {
   const [userAds, setUserAds] = useState(userAdList);
+  const router = useRouter();
+  const { username } = router.query;
   const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    setUserAds(userAdList);
+  }, [userAdList]);
 
   async function handleAdDelete(id) {
     try {
@@ -26,19 +34,23 @@ export default function UserAds({ userAdList }) {
 
   return (
     <Page>
-      <h1 className="text-center text-3xl font-bold">
-        إعلانات {userAds[0].user.username}
-      </h1>
-      <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
-        {userAds?.length > 0 &&
-          userAds?.map(
-            (
-              { category, title, location, price, imgsSrc, _id, slug, user },
-              index
-            ) => {
-              return (
+      {userAds?.length > 0 ? (
+        <>
+          <h1 className="text-center text-3xl font-bold">إعلانات {username}</h1>
+          <div className="flex flex-wrap items-center justify-start pt-6 gap-2 pb-20">
+            {userAds.map(
+              ({
+                category,
+                title,
+                location,
+                price,
+                imgsSrc,
+                _id,
+                slug,
+                user,
+              }) => (
                 <Product
-                  key={index}
+                  key={_id} // Use a unique key like _id
                   category={category}
                   title={title}
                   location={location}
@@ -49,10 +61,13 @@ export default function UserAds({ userAdList }) {
                   user={user}
                   onAdRemove={handleAdDelete}
                 />
-              );
-            }
-          )}
-      </div>
+              )
+            )}
+          </div>
+        </>
+      ) : (
+        <AlertMessage text={`لم يقم ${username} برفع أي إعلانات!`} />
+      )}
     </Page>
   );
 }
