@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import AlertMessage from "@/components/widgets/AlertMessage";
 
 export default function Wishlist() {
   const dispatch = useDispatch();
@@ -66,7 +67,11 @@ export default function Wishlist() {
           ))}
         </div>
       )}
-      {items.length === 0 && <p>فارغة</p>}
+      {items.length === 0 && (
+        <div className="mt-12">
+          <AlertMessage text="لم تقم بالإعجاب بأي إعلان!" />
+        </div>
+      )}
     </Page>
   );
 }

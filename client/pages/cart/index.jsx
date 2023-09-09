@@ -10,6 +10,7 @@ import { BiPlus, BiMinus } from "react-icons/bi";
 import { FiTrash } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
+import AlertMessage from "@/components/widgets/AlertMessage";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -149,7 +150,9 @@ export default function Cart() {
           </div>
         )}
       </div>
-      {items.length === 0 && <p>لم تقف بإضافة عناصر الى السلة</p>}
+      {items.length === 0 && (
+        <AlertMessage text="لم تقم بإضافة عناصر الى السلة!" />
+      )}
     </Page>
   );
 }
